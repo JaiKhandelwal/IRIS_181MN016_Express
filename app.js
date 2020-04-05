@@ -15,7 +15,8 @@ var productsRoutes=require("./routes/products");
 var bidsRoutes=require("./routes/bid");
 var authRoutes=require("./routes/auth");
 
-mongoose.connect("mongodb://localhost/iristask_app",{useNewUrlParser:true,useUnifiedTopology:true});
+//mongoose.connect("mongodb://localhost/iristask_app",{useNewUrlParser:true,useUnifiedTopology:true});
+mongoose.connect(process.env.DATABASEURL,{useNewUrlParser:true,useUnifiedTopology:true});
 mongoose.set('useNewUrlParser',true);
 mongoose.set('useUnifiedTopology',true);
 app.use(bodyParser.urlencoded({extended:true}));
