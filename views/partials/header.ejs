@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Auction House</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/stylesheets/main.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a href="/" class="navbar-brand">Auction House</a>
+					<a href="/products" class="navbar-brand">Home</a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="navbar navbar-nav ml-auto">
+						<% if(!currentUser){ %>
+							<li><a class="navbar-brand" href="/register">Sign up</a></li>
+							<li><a class="navbar-brand" href="/login">Log in</a></li>	
+						<% } else { %>
+						<li><a class="navbar-brand" href="/">Signed in as <%=currentUser.username %></a></li>
+							<li><a class="navbar-brand" href="/logout">Log out</a></li>
+						<% } %>
+							
+						
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<% if(error && error.length>0){ %>
+			<div class="alert alert-danger">
+				<%= error %>
+			</div>
+			<% } %>
+			<% if(success && success.length>0){ %>
+			<div class="alert alert-success">
+				<%= success %>
+			</div>
+			<% } %>
+		</div>

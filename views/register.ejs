@@ -1,0 +1,35 @@
+<%- include("partials/header") %>
+<h1 style="text-align:center">
+	Sign Up here!!
+</h1>
+<div class="container" style="width:30%; margin:25px auto;">
+<form action="register" method="POST">
+	<div class="form-group">
+		<input class="form-control" type="text" name="username" placeholder="username">
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="password" name="password" placeholder="password">
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="text" name="firstName" placeholder="first name">
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="text" name="lastName" placeholder="last name">
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="email" name="email" placeholder="xyz@gmail.com">
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="text" name="profilePic" placeholder="profile pic url">
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="password" name="adminCode" placeholder="Admin code(If you are not admin leave it blank)">
+	</div>
+	<div class="form-group">
+		<button class="btn btn-success">
+			Sign Up
+		</button>
+	</div>
+</form>
+</div>
+<%- include("partials/footer") %>
