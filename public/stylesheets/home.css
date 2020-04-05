@@ -35,22 +35,22 @@ body {
   animation: imageAnimation 50s linear infinite; 
 }
 .slideshow li:nth-child(1) { 
-  background-image: url(http://i.imgur.com/K3mPv14.jpg) 
+  background-image: url(https://cdn.pixabay.com/photo/2016/08/11/23/54/judge-1587300__340.jpg) 
 }
 .slideshow li:nth-child(2) { 
-  background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+  background-image: url(https://cdn.pixabay.com/photo/2015/11/13/06/56/jury-1041589__340.jpg);
   animation-delay: 10s; 
 }
 .slideshow li:nth-child(3) { 
-  background-image: url(http://i.imgur.com/emvhOnb.jpg);
+  background-image: url(https://cdn.pixabay.com/photo/2018/09/09/11/22/house-3664320__340.jpg);
   animation-delay: 20s; 
 }
 .slideshow li:nth-child(4) { 
-  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+  background-image: url(https://cdn.pixabay.com/photo/2019/07/09/23/10/shopping-cart-4327585__340.jpg);
   animation-delay: 30s; 
 }
 .slideshow li:nth-child(5) { 
-  background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
+  background-image: url(https://cdn.pixabay.com/photo/2017/01/11/10/19/guatemala-1971374__340.jpg);
   animation-delay: 40s; 
 }
 @keyframes imageAnimation { 
