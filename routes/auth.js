@@ -7,7 +7,11 @@ var crypto=require("crypto");
 var User=require("../models/user");
 var Product=require("../models/products");
 
+//===========================
+//routes
+//===========================
 
+//route for first/Auction House page
 router.get("/",function(req,res){
 	res.render("home");
 });
@@ -16,10 +20,11 @@ router.get("/",function(req,res){
 //Auth routes
 //================
 
-
+//route for sign Up/register, this route will render the sign up page
 router.get("/register",function(req,res){
 	res.render("register");
 });
+//After user add his details , the details will be posted by this route
 router.post("/register",function(req,res){
 	var newUser=new User({
 		username:req.body.username,
@@ -43,23 +48,26 @@ router.post("/register",function(req,res){
 		});
 	});
 });
+//route for login, this route will render the login page 
 router.get("/login",function(req,res){
 	res.render("login");
 });
+//this route will take the login details and if the details match then the user will be logged in else will be redirected to login page again
 router.post("/login",passport.authenticate("local",{
 	successRedirect: "/products",
 	failureRedirect: "/login"
 }),function(req,res){
 });
+//route for logging out the user
 router.get("/logout",function(req,res){
 	req.logout();
 	req.flash("success","Logged you out");
 	res.redirect("/");
 });
 
-//===================
-//Forgot Password
-//===================
+//==========================
+//routes for Forgot Password
+//==========================
 router.get('/forgot', function(req, res) {
   res.render('forget');
 });
@@ -176,9 +184,9 @@ router.post('/reset/:token', function(req, res) {
   });
 });
 
-//===================
-//User Profile
-//===================
+//=======================
+//routes for User Profile
+//=======================
 
 router.get("/users/:id",function(req,res){
 	User.findById(req.params.id,function(err,foundUser){

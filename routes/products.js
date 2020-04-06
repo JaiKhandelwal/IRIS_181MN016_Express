@@ -3,6 +3,11 @@ var router=express.Router();
 var Product=require("../models/products");
 var Bid=require("../models/bid");
 var middleware=require("../middleware");
+
+//==========================
+//Image upload configuration
+//==========================
+
 var multer = require('multer');
 var storage = multer.diskStorage({
   filename: function(req, file, callback) {
@@ -29,6 +34,7 @@ cloudinary.config({
 //routes
 //==========================
 
+//route for main page where we can see all products
 router.get("/products",function(req,res){
 	var noMatch=null;
 	if(req.query.search){
@@ -57,6 +63,11 @@ router.get("/products",function(req,res){
 	}
 	
 });
+//route for rendering to the new product page where user will able to make new product
+router.get("/products/new",middleware.isLoggedIn,function(req,res){
+	res.render("products/new");
+});
+//route for posting the product to the database and then it can be seen on the main page
 router.post("/products",middleware.isLoggedIn,upload.single("image"),function(req,res){
 	cloudinary.uploader.upload(req.file.path, function(result) {
   // add cloudinary url for the image to the product object under image property
@@ -76,9 +87,7 @@ router.post("/products",middleware.isLoggedIn,upload.single("image"),function(re
   });
 });
 });
-router.get("/products/new",middleware.isLoggedIn,function(req,res){
-	res.render("products/new");
-});
+//Open the detailed information page for a particular product on clicking on more info from the main page
 router.get("/products/:id",function(req,res){
 	Product.findById(req.params.id).populate("bid").exec(function(err,product){
 		if(err){
@@ -149,8 +158,9 @@ router.get("/products/:id",function(req,res){
 				res.render("products/show",{product: product});
 			}
 		}
-	})
-})
+	});
+});
+//route for editing the product, it will render to edit page where you will be able to edit product information
 router.get("/products/:id/edit",middleware.isProductOwner,function(req,res){
 	Product.findById(req.params.id,function(err,foundProduct){
 		if(err){
@@ -161,6 +171,7 @@ router.get("/products/:id/edit",middleware.isProductOwner,function(req,res){
 		}
 	});
 });
+//After editing information of the product this route will update the information of the product
 router.put("/products/:id",upload.single('image'),middleware.isProductOwner,function(req,res){
 	Product.findByIdAndUpdate(req.params.id,req.body.product,async function(err,product){
 		if(err){
@@ -190,6 +201,7 @@ router.put("/products/:id",upload.single('image'),middleware.isProductOwner,func
 		}
 	});
 });
+//route for deleting the product on clicking the delete button
 router.delete("/products/:id",middleware.isProductOwner,function(req,res){
 	Product.findByIdAndRemove(req.params.id,function(err){
 		if(err){
@@ -200,10 +212,10 @@ router.delete("/products/:id",middleware.isProductOwner,function(req,res){
 		}
 	})
 });
-
+//function for search
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
-
+//========================
 
 module.exports=router;
