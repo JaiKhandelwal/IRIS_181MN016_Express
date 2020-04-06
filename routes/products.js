@@ -61,6 +61,7 @@ router.post("/products",middleware.isLoggedIn,upload.single("image"),function(re
 	cloudinary.uploader.upload(req.file.path, function(result) {
   // add cloudinary url for the image to the product object under image property
   req.body.product.image = result.secure_url;
+  req.body.product.imageId=result.public_id;
   // add author to product
   req.body.product.author = {
     id: req.user._id,
@@ -160,16 +161,35 @@ router.get("/products/:id/edit",middleware.isProductOwner,function(req,res){
 		}
 	});
 });
-router.put("/products/:id",middleware.isProductOwner,function(req,res){
-	Product.findByIdAndUpdate(req.params.id,req.body.product,function(err,updateProduct){
+router.put("/products/:id",upload.single('image'),middleware.isProductOwner,function(req,res){
+	Product.findByIdAndUpdate(req.params.id,req.body.product,async function(err,product){
 		if(err){
+			req.flash("error", err.message);
 			res.redirect("/products");
 		}
 		else{
-			res.redirect("/products/"+req.params.id);
+			 if (req.file) {
+              try {
+                  await cloudinary.v2.uploader.destroy(product.imageId);
+                  var result = await cloudinary.v2.uploader.upload(req.file.path);
+				  product.imageId = result.public_id;
+                  product.image = result.secure_url;
+              } catch(err) {
+                  req.flash("error", err.message);
+                  return res.redirect("back");
+              }
+            }
+            product.name = req.body.product.name;
+            product.description = req.body.product.description;
+			product.price=req.body.product.price;
+			product.deadline=req.body.product.deadline;
+			product.contact=req.body.product.contact;
+            product.save();
+            req.flash("success","Successfully Updated!");
+            res.redirect("/products/" + product._id);
 		}
-	})
-})
+	});
+});
 router.delete("/products/:id",middleware.isProductOwner,function(req,res){
 	Product.findByIdAndRemove(req.params.id,function(err){
 		if(err){

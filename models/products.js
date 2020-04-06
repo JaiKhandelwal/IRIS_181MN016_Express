@@ -3,6 +3,7 @@ var productSchema=new mongoose.Schema({
 	name: String,
 	description: String,
 	image: String,
+	imageId: String,
 	startingBid: String,
 	deadline: Date,
 	contact: String,
