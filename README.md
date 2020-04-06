@@ -8,11 +8,11 @@ Here is the link for the project: https://boiling-meadow-26377.herokuapp.com
 ## Implemented features
 1)There is a landing page/first page where user can search for the products or else go to main page to see all the products.
 
-2)If their is a related product that match the user search only those products will be shown on tha main page otherwise if the users search doesn't match any products he/she will get notification that the no product matched your search pls search again with search form available again on the main page.
+2)If there is a related product that match the user search only those products will be shown on tha main page otherwise if the user's search doesn't match any products he/she will get notification that no product matches your search. Please search again with search form available again on the main page.
 
-3)User is able to see all the products(products added by different users) with the product name and the deadline on the main page.
+3)User is able to see all the products(products added by different users) with the product name and its deadline on the main page.
 
-4)If a user want to add a new product he/she needs to first login/signup.
+4)If a user want to add a new product it needs to first login/signup.
 
 5)The product can be added by adding the suitable information and the image can be uploaded from the system.
 
